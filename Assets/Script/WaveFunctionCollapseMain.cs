@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 
 namespace Procedural
 {
-    public class MainWaveFunctionCollapse : MonoBehaviour
+    public class WaveFunctionCollapseMain : MonoBehaviour
     {
         [SerializeField] private int numberOfDifferentCubes = 10;
         [SerializeField] private int squareLenght = 8;
@@ -26,6 +26,7 @@ namespace Procedural
                 return;
             }
 
+            int indexMax = squareLenght - 1;
 
             mapCubes = new GameObject[squareLenght, squareLenght];
             List<Vector2> positionInitialCube = new List<Vector2>(1);
@@ -42,18 +43,68 @@ namespace Procedural
             var index = RandomizeIndex(positionOfPossibilities.Count);
             positionInitialCube[0] = positionOfPossibilities[index];
 
-            CollapseMap(positionInitialCube[0]);
+            CollapseMap(positionInitialCube[0],new Vector2[0]);
 
 
-            bool CollapseMap(Vector2 startingIndex)
+            bool CollapseMap(Vector2 cubeIndex, Vector2[] previousPositions)
             {
-                int x = (int)startingIndex.x;
-                int y = (int)startingIndex.y;
+                int x = (int)cubeIndex.x;
+                int y = (int)cubeIndex.y;
+                bool[] sideCheck = new bool[4];
+
+                for (Side side = 0; (int)side < 4; side++)
+                {
+                    switch (side)
+                    {
+                        case Side.Front:
+                            sideCheck[(int)side] = (y + 1 <= indexMax);
+                            break;
+                        case Side.Back:
+                            sideCheck[(int)side] = (y - 1 >= 0);
+                            break;
+                        case Side.Left:
+                            sideCheck[(int)side]= (x - 1 >= 0);
+                            break;
+                        case Side.Right:
+                            sideCheck[(int)side] = (x + 1 <= indexMax);
+                            break;
+                        default:
+                            break;
+                    }
+
+                }
 
 
 
                 return true;
             }
+
+
+
+
+        }
+
+        private int CheckPossibilities(Vector2 indexToSearch, GameObject previousCube, Side sideOfPreviousCube)
+        {
+            int numberOfPossibilites = 0;
+            int previousIndiceRef = previousCube.GetComponent<CanBeNextTo>().adjoiningCubes[sideOfPreviousCube];
+
+            GameObject actualCube = mapCubes[(int)indexToSearch.x, (int)indexToSearch.y];
+            WaveFunctionCollapsePossibilites actualPossibilites = actualCube.GetComponent<WaveFunctionCollapsePossibilites>();
+
+            if (actualPossibilites.possibleCube.Count > 1)
+            {
+                for (int i = 0; i < actualPossibilites.possibleCube.Count; i++)
+                {
+                    int possibilitieIndiceRef = actualPossibilites.possibleCube[i].GetComponent<CanBeNextTo>().adjoiningCubes[SideHelp.GetInverseSide(sideOfPreviousCube)];
+
+                    numberOfPossibilites += (possibilitieIndiceRef == previousIndiceRef) ? 1 : 0;
+
+                }
+            }
+            numberOfPossibilites -= (numberOfPossibilites == actualPossibilites.possibleCube.Count) ? 1 : 0;
+            
+            return numberOfPossibilites;
         }
 
         [Button(ButtonSizes.Large)]

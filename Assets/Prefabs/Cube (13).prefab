@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8744165457980533039}
   - component: {fileID: 8744165457980533038}
   - component: {fileID: -1072213306593331117}
+  - component: {fileID: -6666365328584669699}
   m_Layer: 0
   m_Name: Cube (13)
   m_TagString: Untagged
@@ -106,3 +107,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 178c8d24a584f3a478d4fd7a9a9ea499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  adjoiningCubes:
+    _Buckets: 00000000010000000200000003000000ffffffffffffffffffffffff
+    _HashCodes: 00000000010000000200000003000000000000000000000000000000
+    _Next: ffffffffffffffffffffffffffffffff000000000000000000000000
+    _Count: 4
+    _Version: 4
+    _FreeList: -1
+    _FreeCount: 0
+    _Keys: 00000000010000000200000003000000000000000000000000000000
+    _Values: 00000000010000000200000003000000000000000000000000000000
+--- !u!114 &-6666365328584669699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8744165457980533035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 738494dfa66f6d149ad5dc6da6affd47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possibleCube: []

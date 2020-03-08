@@ -20,7 +20,7 @@ namespace Procedural
     {
         private Color[] colorsSideCubes = { Color.blue, Color.red, Color.green, Color.magenta };
         //public GameObject[] adjoiningCubes = new GameObject[4];
-        public SideDictionnary sideDictionnary = new SideDictionnary();
+        public SideDictionnary adjoiningCubes = new SideDictionnary();
         
     }
 
