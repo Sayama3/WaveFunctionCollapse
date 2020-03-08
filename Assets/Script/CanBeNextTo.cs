@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 
 namespace Procedural
 {
+
     public enum Side
     {
         Front,
@@ -55,6 +56,8 @@ namespace Procedural
             return inverSide;
 
         }
+
+
     }
 
 
