@@ -23,7 +23,6 @@ namespace Procedural
         [Button(ButtonSizes.Large)]
         public void MakeMap()
         {
-            UseRandomCubes();
             if (cubesUsed.Count != numberOfDifferentCubes)
             {
                 Debug.LogError("Il y a " + ((cubesUsed.Count < 10) ? "pas assez" : "trop") + " de cubes dans la liste (" + cubesUsed.Count + ").");

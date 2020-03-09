@@ -157,15 +157,20 @@ namespace Procedural
             theCamera.position = position;
 
         }
+
+        [Button(ButtonSizes.Large)]
         public void GenerateList()
         {
             for (int i = 0; i < cubes.Count; i++)
             {
-                Instantiate(cubes[i], Vector3.zero, Quaternion.identity);
+                GameObject generatedCube = Instantiate(cubes[i], Vector3.zero, Quaternion.identity);
+                DestroyImmediate(cubes[i]);
+                cubes[i] = generatedCube;
                 ResetPosition(Vector3.up * 100);
             }
             
         }
+
     }
 }
 
