@@ -22,6 +22,12 @@ namespace Procedural
         //public GameObject[] adjoiningCubes = new GameObject[4];
         public SideDictionnary adjoiningCubes = new SideDictionnary();
 
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawSphere(transform.position + Vector3.up / 2, transform.localScale.x / 4);
+        }
+
     }
 
     [Serializable]

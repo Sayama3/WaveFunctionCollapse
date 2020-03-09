@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3240755268533895109}
   - component: {fileID: 3240755268533895108}
   - component: {fileID: -5159103366843730448}
-  - component: {fileID: 8192957738913434598}
   - component: {fileID: 4107337046599131731}
   m_Layer: 0
   m_Name: Cube (10)
@@ -118,19 +117,6 @@ MonoBehaviour:
     _FreeCount: 0
     _Keys: 00000000010000000200000003000000000000000000000000000000
     _Values: 00000000010000000200000003000000000000000000000000000000
---- !u!114 &8192957738913434598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3240755268533895105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 738494dfa66f6d149ad5dc6da6affd47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  possibleCube: []
 --- !u!114 &4107337046599131731
 MonoBehaviour:
   m_ObjectHideFlags: 0
