@@ -9,12 +9,16 @@ namespace Procedural
     public class Positionneur : MonoBehaviour
     {
         [SerializeField] private List<GameObject> cubes = new List<GameObject>();
-        [SerializeField] private Transform camera;
+        [SerializeField] private Transform theCamera;
         public static bool isIndexReady = false;
 
         private void Start()
         {
             ResetPosition(new Vector3(0, 10));
+            if (theCamera == null)
+            {
+                theCamera = Camera.main.transform;
+            }
         }
 
         [Button]
@@ -91,21 +95,76 @@ namespace Procedural
                 cubes.Add(cubesArray[i]);
             }
         }
+        public void SetListeCube(List<GameObject>[,] cubesArray,int lenghtArray)
+        {
+            if (cubes == null)
+            {
+                cubes = new List<GameObject>();
+            }
+            else if (cubes.Count > 0)
+            {
+                foreach (var item in cubes)
+                {
+                    DestroyImmediate(item);
+                }
+                cubes.Clear();
+            }
+            for (int x = 0; x < lenghtArray; x++)
+            {
+                for (int y = 0; y < lenghtArray; y++)
+                {
+                    cubes.Add(cubesArray[x, y][0]);
+                }
+            }
+        }
+        public void SetListeCube(GameObject[,] cubesArray, int lenghtArray)
+        {
+            if (cubes == null)
+            {
+                cubes = new List<GameObject>();
+            }
+            else if (cubes.Count > 0)
+            {
+                foreach (var item in cubes)
+                {
+                    DestroyImmediate(item);
+                }
+                cubes.Clear();
+            }
+            for (int x = 0; x < lenghtArray; x++)
+            {
+                for (int y = 0; y < lenghtArray; y++)
+                {
+                    cubes.Add(cubesArray[x, y]);
+                }
+            }
+        }
         public void PositionnementMainCamera(int tailleDeLArette)
         {
-            //Debug.Log("Positionnement de la camera en cours");
-            //camera = Camera.main.transform;
-            
+            //Debug.Log("Positionnement de la theCamera en cours");
+            //theCamera = Camera.main.transform;
+
 
             float positionCotee = Mathf.Max((((float)tailleDeLArette - 1) / 2), 0);
 
-            Vector3 position = new Vector3();
-            position.y = tailleDeLArette + 0.5f;
-            position.x = positionCotee;
-            position.z = positionCotee;
+            Vector3 position = new Vector3
+            {
+                y = tailleDeLArette + 0.5f,
+                x = positionCotee,
+                z = positionCotee
+            };
 
-            camera.position = position;
+            theCamera.position = position;
 
+        }
+        public void GenerateList()
+        {
+            for (int i = 0; i < cubes.Count; i++)
+            {
+                Instantiate(cubes[i], Vector3.zero, Quaternion.identity);
+                ResetPosition(Vector3.up * 100);
+            }
+            
         }
     }
 }

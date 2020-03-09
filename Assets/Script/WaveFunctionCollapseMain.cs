@@ -14,8 +14,12 @@ namespace Procedural
         [SerializeField] private List<GameObject> cubesUsed = new List<GameObject>();
         [SerializeField] private List<GameObject> allTheCubes = new List<GameObject>();
 
-        private GameObject[,] mapCubes;
+        private List<GameObject>[,] mapCubes;
 
+        int indexMax;
+        List<Vector2Int> positionInitialCube = new List<Vector2Int>();
+        List<GameObject> choosenInitialCube = new List<GameObject>();
+        List<Vector2Int> positionOfPossibilities = new List<Vector2Int>();
         [Button(ButtonSizes.Large)]
         public void MakeMap()
         {
@@ -26,85 +30,168 @@ namespace Procedural
                 return;
             }
 
-            int indexMax = squareLenght - 1;
+            indexMax = squareLenght - 1;
 
-            mapCubes = new GameObject[squareLenght, squareLenght];
-            List<Vector2> positionInitialCube = new List<Vector2>(1);
-            List<Vector2> positionOfPossibilities = new List<Vector2>(squareLenght* squareLenght);
-
+            mapCubes = new List<GameObject>[squareLenght, squareLenght];
+            positionInitialCube = new List<Vector2Int>(1);
+            choosenInitialCube = new List<GameObject>(1);
+            positionOfPossibilities = new List<Vector2Int>(squareLenght * squareLenght);
             
+
             for (int i = 0; i < squareLenght; i++)
             {
                 for (int j = 0; j < squareLenght; j++)
                 {
-                    positionOfPossibilities[((i * squareLenght) - 1) + j] = new Vector2(i, j);
+                    positionOfPossibilities[((i * squareLenght) - 1) + j] = new Vector2Int(i, j);
                 }
             }
             var index = RandomizeIndex(positionOfPossibilities.Count);
             positionInitialCube[0] = positionOfPossibilities[index];
 
-            CollapseMap(positionInitialCube[0],new Vector2[0]);
+            index = RandomizeIndex(cubesUsed.Count);
+            choosenInitialCube[0] = cubesUsed[index];
 
-
-            bool CollapseMap(Vector2 cubeIndex, Vector2[] previousPositions)
+            for (int i = 0; i < squareLenght; i++)
             {
-                int x = (int)cubeIndex.x;
-                int y = (int)cubeIndex.y;
-                bool[] sideCheck = new bool[4];
-
-                for (Side side = 0; (int)side < 4; side++)
+                for (int j = 0; j < squareLenght; j++)
                 {
-                    switch (side)
-                    {
-                        case Side.Front:
-                            sideCheck[(int)side] = (y + 1 <= indexMax);
-                            break;
-                        case Side.Back:
-                            sideCheck[(int)side] = (y - 1 >= 0);
-                            break;
-                        case Side.Left:
-                            sideCheck[(int)side]= (x - 1 >= 0);
-                            break;
-                        case Side.Right:
-                            sideCheck[(int)side] = (x + 1 <= indexMax);
-                            break;
-                        default:
-                            break;
-                    }
-
+                    mapCubes[i, j] = new List<GameObject>(cubesUsed);
                 }
-
-
-
-                return true;
             }
 
 
+        Research:
+            foreach (var item in mapCubes[(int)positionInitialCube[positionInitialCube.Count - 1].x, (int)positionInitialCube[positionInitialCube.Count - 1].y])
+            {
+                if (item != choosenInitialCube[choosenInitialCube.Count - 1])
+                {
+                    CollapseMap(positionInitialCube[positionInitialCube.Count - 1], new List<Vector2>(0), item);
+                }
+            }
+            if (positionOfPossibilities.Count >0)
+            {
+                index = RandomizeIndex(positionOfPossibilities.Count);
+                positionInitialCube.Add(positionOfPossibilities[index]);
+
+                index = RandomizeIndex(mapCubes[positionInitialCube[positionInitialCube.Count - 1].x, positionInitialCube[positionInitialCube.Count - 1].y].Count);
+                choosenInitialCube.Add(mapCubes[positionInitialCube[positionInitialCube.Count - 1].x, positionInitialCube[positionInitialCube.Count - 1].y][index]);
+                goto Research;
+            }
+
+            Positionneur positionneur = GetComponent<Positionneur>();
+            positionneur.SetListeCube(mapCubes, squareLenght);
+            positionneur.GenerateList();
+            positionneur.PositionnementCubes(squareLenght);
 
 
         }
 
-        private int CheckPossibilities(Vector2 indexToSearch, GameObject previousCube, Side sideOfPreviousCube)
+        void CollapseMap(Vector2 cubeIndex, List<Vector2> previousPositions, GameObject objectToDestroy)
+        {
+            int x = (int)cubeIndex.x;
+            int y = (int)cubeIndex.y;
+            if (objectToDestroy == null || mapCubes[x,y].Count <= 1) return;
+
+
+            List<Vector2> allPositions = new List<Vector2>(previousPositions)
+            {
+                cubeIndex
+            };
+
+            bool[] sideCheck = new bool[4];
+            int[] sideNumberPossibilities = new int[4];
+            List<GameObject>[] sidePossibilites = new List<GameObject>[4];
+            Vector2[] nextPositions = new Vector2[4];
+
+
+
+            for (int i = 0; i < sideCheck.Length; i++)
+            {
+                switch ((Side)i)
+                {
+                    case Side.Front:
+                        sideCheck[i] = (y + 1 <= indexMax);
+                        nextPositions[i] = new Vector2(x, y + 1);
+                        break;
+                    case Side.Back:
+                        sideCheck[i] = (y - 1 >= 0);
+                        nextPositions[i] = new Vector2(x, y - 1);
+                        break;
+                    case Side.Left:
+                        sideCheck[i] = (x - 1 >= 0);
+                        nextPositions[i] = new Vector2(x - 1, y);
+                        break;
+                    case Side.Right:
+                        sideCheck[i] = (x + 1 <= indexMax);
+                        nextPositions[i] = new Vector2(x + 1, y);
+                        break;
+                    default:
+                        break;
+                }
+                foreach (var item in previousPositions)
+                {
+                    if (item == nextPositions[i])
+                    {
+                        sideCheck[i] = false;
+                        break;
+                    }
+                }
+                sidePossibilites[i] = (sideCheck[i]) ? CheckPossibilities(nextPositions[i], objectToDestroy, (Side)i) : new List<GameObject>(0);
+                sideNumberPossibilities[i] = sidePossibilites[i].Count;
+
+            }
+
+            Side nextSide;
+
+            do
+            {
+                nextSide = (Side)RandomizeIndex(sideCheck.Length);
+            } while (sidePossibilites[(int)nextSide].Count > 0);
+
+
+            for (int i = 0; i < sideCheck.Length; i++)
+            {
+                for (int j = 0; j < sideNumberPossibilities[(int)nextSide]; j++)
+                {
+                    var index = RandomizeIndex(sidePossibilites[(int)nextSide].Count);
+                    CollapseMap(nextPositions[(int)nextSide], allPositions, sidePossibilites[(int)nextSide][index]);
+                    sidePossibilites[(int)nextSide].RemoveAt(index);
+                }
+                nextSide = ((int)nextSide + 1 < 4) ? (nextSide + 1) : 0;
+            }
+
+            mapCubes[x, y].Remove(objectToDestroy);
+            if (mapCubes[x, y].Count <= 1)
+            {
+                positionOfPossibilities.RemoveAt(x * squareLenght + y);
+            }
+
+        }
+
+        private List<GameObject> CheckPossibilities(Vector2 indexToSearch, GameObject previousCube, Side sideOfPreviousCube)
         {
             int numberOfPossibilites = 0;
+            List<GameObject> possibilities = new List<GameObject>();
             int previousIndiceRef = previousCube.GetComponent<CanBeNextTo>().adjoiningCubes[sideOfPreviousCube];
 
-            GameObject actualCube = mapCubes[(int)indexToSearch.x, (int)indexToSearch.y];
-            WaveFunctionCollapsePossibilites actualPossibilites = actualCube.GetComponent<WaveFunctionCollapsePossibilites>();
+            List<GameObject> actualPossibilites = mapCubes[(int)indexToSearch.x, (int)indexToSearch.y];
 
-            if (actualPossibilites.possibleCube.Count > 1)
+            if (actualPossibilites.Count > 1)
             {
-                for (int i = 0; i < actualPossibilites.possibleCube.Count; i++)
+                for (int i = 0; i < actualPossibilites.Count; i++)
                 {
-                    int possibilitieIndiceRef = actualPossibilites.possibleCube[i].GetComponent<CanBeNextTo>().adjoiningCubes[SideHelp.GetInverseSide(sideOfPreviousCube)];
+                    int possibilitieIndiceRef = actualPossibilites[i].GetComponent<CanBeNextTo>().adjoiningCubes[SideHelp.GetInverseSide(sideOfPreviousCube)];
 
-                    numberOfPossibilites += (possibilitieIndiceRef == previousIndiceRef) ? 1 : 0;
-
+                    if (possibilitieIndiceRef == previousIndiceRef)
+                    {
+                        possibilities.Add(actualPossibilites[i]);
+                        numberOfPossibilites++;
+                    }
                 }
             }
-            numberOfPossibilites -= (numberOfPossibilites == actualPossibilites.possibleCube.Count) ? 1 : 0;
-            
-            return numberOfPossibilites;
+            numberOfPossibilites -= (numberOfPossibilites == actualPossibilites.Count) ? 1 : 0;
+
+            return possibilities;
         }
 
         [Button(ButtonSizes.Large)]
@@ -114,7 +201,7 @@ namespace Procedural
 
             List<GameObject> allTheCubeLeft = new List<GameObject>(allTheCubes);
             cubesUsed.Clear();
-            
+
             for (int i = 0; i < numberOfDifferentCubes; i++)
             {
                 var index = RandomizeIndex(allTheCubeLeft.Count);
@@ -127,7 +214,7 @@ namespace Procedural
 
         private int RandomizeIndex(int lenghtList)
         {
-            int index = seed%lenghtList;
+            int index = seed % lenghtList;
             seed = SeedHelp.EnhanceSeed(seed, index);
             return index;
         }
