@@ -9,15 +9,16 @@ namespace Procedural
     public class RandomizeColor : MonoBehaviour
     {
         // Start is called before the first frame update
-        private void Start()
-        {
-            ChangeAleaColor();
-        }
+        //private void Start()
+        //{
+        //    ChangeAleaColor();
+        //}
 
         [Button(ButtonSizes.Gigantic)]
         void ChangeAleaColor()
         {
-            GetComponent<MeshRenderer>().material.color = Random.ColorHSV();
+            Random.InitState((int)System.DateTime.Now.Ticks);
+            GetComponent<MeshRenderer>().sharedMaterial.color = Random.ColorHSV();
             //Debug.Log("Done");
         }
     }

@@ -12,7 +12,8 @@ namespace Procedural
         Front,
         Back,
         Left,
-        Right
+        Right,
+        Null
     }
 
     [ExecuteInEditMode]
@@ -31,7 +32,7 @@ namespace Procedural
     }
 
     [Serializable]
-    public class SideDictionnary : SerializableDictionary<Side, int> { }
+    public class SideDictionnary : SerializableDictionary<Side, List<GameObject>> { }
 
     public static class SideHelp
     {

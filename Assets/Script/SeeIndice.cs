@@ -10,7 +10,7 @@ namespace Procedural
     {
         private List<GameObject> cubesWithIndice = new List<GameObject>();
         private List<List<Side>> associateSide = new List<List<Side>>();
-        [SerializeField] private int indice = 0;
+        [SerializeField] private GameObject indice = null;
 
         //[Button(ButtonSizes.Large)]
         private void Update()
@@ -21,18 +21,22 @@ namespace Procedural
             foreach (var item in allCube)
             {
                 CanBeNextTo sided = item.GetComponent<CanBeNextTo>();
-                if (sided.adjoiningCubes.ContainsValue(indice))
+                for (int i = 0; i < sided.adjoiningCubes.Count; i++)
                 {
-                    cubesWithIndice.Add(item);
-                    associateSide.Add(new List<Side>());
-                    for (int i = 0; i < sided.adjoiningCubes.Count; i++)
+                    if (sided.adjoiningCubes[(Side)i] != null)
                     {
-                        if (sided.adjoiningCubes[(Side)i] == indice)
+                        for (int j = 0; j < sided.adjoiningCubes[(Side)i].Count; j++)
                         {
-                            associateSide[associateSide.Count - 1].Add((Side)i);
+                            if (sided.adjoiningCubes[(Side)i][j] == indice)
+                            {
+                                cubesWithIndice.Add(item);
+                                associateSide.Add(new List<Side>());
+                                associateSide[associateSide.Count - 1].Add((Side)i);
+                            }
                         }
                     }
                 }
+                
             }
         }
 

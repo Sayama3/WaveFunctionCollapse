@@ -171,7 +171,7 @@ namespace Procedural
         {
             int numberOfPossibilites = 0;
             List<GameObject> possibilities = new List<GameObject>();
-            int previousIndiceRef = previousCube.GetComponent<CanBeNextTo>().adjoiningCubes[sideOfPreviousCube];
+            var previousIndiceRef = previousCube.GetComponent<CanBeNextTo>().adjoiningCubes[sideOfPreviousCube];
 
             List<GameObject> actualPossibilites = mapCubes[(int)indexToSearch.x, (int)indexToSearch.y];
 
@@ -179,7 +179,7 @@ namespace Procedural
             {
                 for (int i = 0; i < actualPossibilites.Count; i++)
                 {
-                    int possibilitieIndiceRef = actualPossibilites[i].GetComponent<CanBeNextTo>().adjoiningCubes[SideHelp.GetInverseSide(sideOfPreviousCube)];
+                    var possibilitieIndiceRef = actualPossibilites[i].GetComponent<CanBeNextTo>().adjoiningCubes[SideHelp.GetInverseSide(sideOfPreviousCube)];
 
                     if (possibilitieIndiceRef == previousIndiceRef)
                     {
