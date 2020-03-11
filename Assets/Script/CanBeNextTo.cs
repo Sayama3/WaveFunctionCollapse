@@ -12,16 +12,17 @@ namespace Procedural
         Front,
         Back,
         Left,
-        Right,
-        Null
+        Right
     }
 
     [ExecuteInEditMode]
-    public class CanBeNextTo : MonoBehaviour
+    public class CanBeNextTo : SerializedMonoBehaviour
     {
         private Color[] colorsSideCubes = { Color.blue, Color.red, Color.green, Color.magenta };
-        //public GameObject[] adjoiningCubes = new GameObject[4];
-        public SideDictionnary adjoiningCubes = new SideDictionnary();
+
+        [DictionaryDrawerSettings(DisplayMode = DictionaryDisplayOptions.Foldout,KeyLabel = "Side",ValueLabel = "Cubes Associates")]
+        public Dictionary<Side, List<GameObject>> adjoiningCubes = new Dictionary<Side, List<GameObject>>();
+
 
         private void OnDrawGizmosSelected()
         {
@@ -31,8 +32,6 @@ namespace Procedural
 
     }
 
-    [Serializable]
-    public class SideDictionnary : SerializableDictionary<Side, List<GameObject>> { }
 
     public static class SideHelp
     {
@@ -64,7 +63,26 @@ namespace Procedural
 
         }
 
-
+        public static string ShowRealName(Side givenSide)
+        {
+            string realName = "";
+            switch (givenSide)
+            {
+                case Side.Front:
+                    realName = "devant";
+                    break;
+                case Side.Back:
+                    realName = "derrière";
+                    break;
+                case Side.Left:
+                    realName = "à gauche";
+                    break;
+                case Side.Right:
+                    realName = "à droite";
+                    break;
+            }
+            return realName;
+        }
     }
 
 
