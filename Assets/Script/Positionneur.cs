@@ -164,7 +164,7 @@ namespace Procedural
             for (int i = 0; i < cubes.Count; i++)
             {
                 GameObject generatedCube = Instantiate(cubes[i], Vector3.zero, Quaternion.identity);
-                DestroyImmediate(cubes[i]);
+                DestroyImmediate(cubes[i],false);
                 cubes[i] = generatedCube;
                 ResetPosition(Vector3.up * 100);
             }

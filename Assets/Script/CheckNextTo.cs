@@ -36,7 +36,7 @@ namespace Procedural
                     if (!found)
                     {
                         problematicsCubes.Add(cubeTest);
-                        problematicsSide.Add(side);
+                        problematicsSide.Add(inverseSide);
                     }
 
                 }
@@ -44,7 +44,7 @@ namespace Procedural
             }
             if (problematicsCubes.Count >0)
             {
-                Debug.LogError("Il y a un problème, " + problematicsCubes.Count + " cubes ne se comprènent pas, les voici.");
+                Debug.LogError("Il y a un problème avec " + name + ", " + problematicsCubes.Count + " cubes ne se comprènent pas, les voici.");
                 for (int i = 0; i < problematicsCubes.Count; i++)
                 {
                     Debug.LogError(problematicsCubes[i].name + " n'est pas associé " + SideHelp.ShowRealName(problematicsSide[i]));

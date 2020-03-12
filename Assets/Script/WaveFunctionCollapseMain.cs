@@ -32,23 +32,33 @@ namespace Procedural
             indexMax = squareLenght - 1;
 
             mapCubes = new List<GameObject>[squareLenght, squareLenght];
-            positionInitialCube = new List<Vector2Int>(1);
-            choosenInitialCube = new List<GameObject>(1);
-            positionOfPossibilities = new List<Vector2Int>(squareLenght * squareLenght);
+            mapCubes.Initialize();
+            for (int i = 0; i < squareLenght; i++)
+            {
+                for (int j = 0; j < squareLenght; j++)
+                {
+                    mapCubes[i, j] = cubesUsed;
+                }
+            }
+
+
+            positionInitialCube = new List<Vector2Int>();
+            choosenInitialCube = new List<GameObject>();
+            positionOfPossibilities = new List<Vector2Int>();
             
 
             for (int i = 0; i < squareLenght; i++)
             {
                 for (int j = 0; j < squareLenght; j++)
                 {
-                    positionOfPossibilities[((i * squareLenght) - 1) + j] = new Vector2Int(i, j);
+                    positionOfPossibilities.Add(new Vector2Int(i, j));
                 }
             }
             var index = RandomizeIndex(positionOfPossibilities.Count);
-            positionInitialCube[0] = positionOfPossibilities[index];
+            positionInitialCube.Add(positionOfPossibilities[index]);
 
             index = RandomizeIndex(cubesUsed.Count);
-            choosenInitialCube[0] = cubesUsed[index];
+            choosenInitialCube.Add(cubesUsed[index]);
 
             for (int i = 0; i < squareLenght; i++)
             {
@@ -60,18 +70,32 @@ namespace Procedural
 
 
         Research:
-            foreach (var item in mapCubes[(int)positionInitialCube[positionInitialCube.Count - 1].x, (int)positionInitialCube[positionInitialCube.Count - 1].y])
+            //Debug.Log(mapCubes[positionInitialCube[positionInitialCube.Count - 1].x, positionInitialCube[positionInitialCube.Count - 1].y][0].name);
+            //foreach (var item in (mapCubes[positionInitialCube[positionInitialCube.Count - 1].x, positionInitialCube[positionInitialCube.Count - 1].y]))
+            for (int i = 0; i < mapCubes[positionInitialCube[positionInitialCube.Count - 1].x, positionInitialCube[positionInitialCube.Count - 1].y].Count; i++)
             {
+                var item = mapCubes[positionInitialCube[positionInitialCube.Count - 1].x, positionInitialCube[positionInitialCube.Count - 1].y][i];
                 if (item != choosenInitialCube[choosenInitialCube.Count - 1])
                 {
                     CollapseMap(positionInitialCube[positionInitialCube.Count - 1], new List<Vector2>(0), item);
                 }
             }
-            if (positionOfPossibilities.Count >0)
+            int possibilitesLeft = 0;
+            List<Vector2Int> possibilityLeftReal = new List<Vector2Int>();
+            for (int i = 0; i < positionOfPossibilities.Count; i++)
             {
-                index = RandomizeIndex(positionOfPossibilities.Count);
-                positionInitialCube.Add(positionOfPossibilities[index]);
-
+                if (positionOfPossibilities[i] != Vector2.down)
+                {
+                    possibilitesLeft++;
+                    possibilityLeftReal.Add(positionOfPossibilities[i]);
+                }
+            }
+            if (possibilitesLeft > 0)
+            {
+                index = RandomizeIndex(possibilityLeftReal.Count);
+                positionInitialCube.Add(possibilityLeftReal[index]);
+                Debug.Log("Possibility left : " + possibilitesLeft);
+                Debug.Log("index : " + positionInitialCube[positionInitialCube.Count - 1].x+ " , " + positionInitialCube[positionInitialCube.Count - 1].y);
                 index = RandomizeIndex(mapCubes[positionInitialCube[positionInitialCube.Count - 1].x, positionInitialCube[positionInitialCube.Count - 1].y].Count);
                 choosenInitialCube.Add(mapCubes[positionInitialCube[positionInitialCube.Count - 1].x, positionInitialCube[positionInitialCube.Count - 1].y][index]);
                 goto Research;
@@ -162,7 +186,9 @@ namespace Procedural
             mapCubes[x, y].Remove(objectToDestroy);
             if (mapCubes[x, y].Count <= 1)
             {
-                positionOfPossibilities.RemoveAt(x * squareLenght + y);
+                //Debug.Log(positionOfPossibilities[x * squareLenght + y]);
+                //positionOfPossibilities.RemoveAt(x * squareLenght + y);
+                positionOfPossibilities[x * squareLenght + y] = Vector2Int.down;
             }
 
         }
