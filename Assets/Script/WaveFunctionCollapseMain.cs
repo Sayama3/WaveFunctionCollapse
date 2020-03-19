@@ -20,6 +20,9 @@ namespace Procedural
         List<Vector2Int> positionInitialCube = new List<Vector2Int>();
         List<GameObject> choosenInitialCube = new List<GameObject>();
         List<Vector2Int> positionOfPossibilities = new List<Vector2Int>();
+        
+        
+        
         [Button(ButtonSizes.Large)]
         public void MakeMap()
         {
@@ -75,8 +78,11 @@ namespace Procedural
                     CollapseMap(positionInitialCube[positionInitialCube.Count - 1], new List<Vector2>(0), item);
                 }
             }
+            
             int possibilitesLeft = 0;
+            
             List<Vector2Int> possibilityLeftReal = new List<Vector2Int>();
+            
             for (int i = 0; i < positionOfPossibilities.Count; i++)
             {
                 if (positionOfPossibilities[i] != Vector2.down)
@@ -87,7 +93,7 @@ namespace Procedural
             }
             if (possibilitesLeft > 0)
             {
-                index = RandomizeIndex(possibilityLeftReal.Count);
+                index = RandomizeIndex(possibilitesLeft);
                 positionInitialCube.Add(possibilityLeftReal[index]);
                 //Debug.Log("Possibility left : " + possibilitesLeft);
                 //Debug.Log("index : " + positionInitialCube[positionInitialCube.Count - 1].x + " , " + positionInitialCube[positionInitialCube.Count - 1].y);
@@ -104,7 +110,7 @@ namespace Procedural
 
         }
 
-        [Button(ButtonSizes.Large)]
+        //[Button(ButtonSizes.Large)]
         private void BuildMap()
         {
             mapCubes = new List<GameObject>[squareLenght, squareLenght];
@@ -144,6 +150,7 @@ namespace Procedural
             for (int i = 0; i < sideCheck.Length; i++)
             {
                 nextPositions[i] = SideHelp.NextIndex(cubeIndex, (Side)i);
+                
                 if (nextPositions[i].x <= indexMax.x && nextPositions[i].y <= indexMax.y && nextPositions[i].x >=0 && nextPositions[i].y >=0)
                 {
                     sideCheck[i] = true;
@@ -161,14 +168,16 @@ namespace Procedural
                         break;
                     }
                 }
+                
                 sidePossibilites[i] = (sideCheck[i]) ? GetPossibilities(cubeIndex, objectToDestroy, (Side)i) : new List<GameObject>(0);
                 sideNumberPossibilities[i] = sidePossibilites[i].Count;
 
             }
 
             Side nextSide = (Side)RandomizeIndex(sideCheck.Length);
+            
             int h = 0;
-            do
+            while (sidePossibilites[(int)nextSide].Count > 0);
             {
                 if (h == 4)
                 {
@@ -177,7 +186,7 @@ namespace Procedural
                 nextSide = ((int)nextSide + 1 < 4) ? ++nextSide : 0;
                 ++h;
                 
-            } while (sidePossibilites[(int)nextSide].Count > 0);
+            } 
 
 
             for (int i = 0; i < sideCheck.Length; i++)
@@ -186,7 +195,7 @@ namespace Procedural
                 {
                     var index = RandomizeIndex(sidePossibilites[(int)nextSide].Count);
 
-                    if (CubeHaveAnyPossibility(sidePossibilites[(int)nextSide][index], nextPositions[(int)nextSide], SideHelp.GetInverseSide(nextSide)))
+                    if (CubeHaveAnyPossibility(sidePossibilites[(int)nextSide][index], nextPositions[(int)nextSide], SideHelp.GetInverseSide(nextSide),objectToDestroy))
                     {
                         CollapseMap(nextPositions[(int)nextSide], allPositions, sidePossibilites[(int)nextSide][index]);
                     }
@@ -194,7 +203,9 @@ namespace Procedural
                 }
                 nextSide = ((int)nextSide + 1 < 4) ? (nextSide + 1) : 0;
             }
+            
             SwitchTheCollaps:
+            
             mapCubes[x, y].Remove(objectToDestroy);
             if (mapCubes[x, y].Count <= 1)
             {
@@ -207,7 +218,7 @@ namespace Procedural
 
         private List<GameObject> GetPossibilities(Vector2Int indexOfCube, GameObject previousCube, Side sideOfCube)
         {
-            int numberOfPossibilites = 0;
+            //int numberOfPossibilites = 0;
             List<GameObject> possibilities = new List<GameObject>();
             var cubePossibilites = previousCube.GetComponent<CanBeNextTo>().adjoiningCubes[sideOfCube];
 
@@ -237,19 +248,20 @@ namespace Procedural
                     }
                 }
             }
-            numberOfPossibilites -= (numberOfPossibilites == actualPossibilites.Count) ? 1 : 0;
+            //numberOfPossibilites -= (numberOfPossibilites == actualPossibilites.Count) ? 1 : 0;
 
             return possibilities;
         }
 
-        [Button]
-        private bool CubeHaveAnyPossibility(GameObject cubeToCheck,Vector2Int cubeIndex,Side sideToSearch)
+        
+        private bool CubeHaveAnyPossibility(GameObject cubeToCheck,Vector2Int cubeIndex,Side sideToSearch, GameObject cubeExeption)
         {
             int x = cubeIndex.x;
             int y = cubeIndex.y;
             int index = mapCubes[x, y].FindIndex(0, mapCubes[x, y].Count, (GameObject obj) => (obj == cubeToCheck));
             Vector2Int oldIndex = SideHelp.NextIndex(cubeIndex, sideToSearch);
-
+            
+            //Finir la fonction
 
             return true;
         }
