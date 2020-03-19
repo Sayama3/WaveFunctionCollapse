@@ -86,7 +86,7 @@ namespace Procedural
             {
                 foreach (var item in cubes)
                 {
-                    DestroyImmediate(item);
+                    DestroyImmediate(item,false);
                 }
                 cubes.Clear();
             }

@@ -83,6 +83,27 @@ namespace Procedural
             }
             return realName;
         }
+
+        public static Vector2Int NextIndex(Vector2Int index, Side givenSide)
+        {
+            Vector2Int newIndex = index;
+            switch (givenSide)
+            {
+                case Side.Front:
+                    newIndex += Vector2Int.up;
+                    break;
+                case Side.Back:
+                    newIndex += Vector2Int.down;
+                    break;
+                case Side.Left:
+                    newIndex += Vector2Int.left;
+                    break;
+                case Side.Right:
+                    newIndex += Vector2Int.right;
+                    break;
+            }
+            return newIndex;
+        }
     }
 
 
