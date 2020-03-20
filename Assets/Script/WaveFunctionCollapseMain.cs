@@ -260,10 +260,29 @@ namespace Procedural
             int y = cubeIndex.y;
             int index = mapCubes[x, y].FindIndex(0, mapCubes[x, y].Count, (GameObject obj) => (obj == cubeToCheck));
             Vector2Int oldIndex = SideHelp.NextIndex(cubeIndex, sideToSearch);
-            
-            //Finir la fonction
+            bool foundPossibilities = false;
 
-            return true;
+            List<GameObject> possibilites = cubeToCheck.GetComponent<CanBeNextTo>().adjoiningCubes[sideToSearch];
+
+            foreach(var aCube in mapCubes[oldIndex.x, oldIndex.y])
+            {
+                if (aCube != cubeExeption)
+                {
+                    foreach (var possibilite in possibilites)
+                    {
+                        if (possibilite == aCube)
+                        {
+                            foundPossibilities = true;
+                            break;
+                        }
+                    }
+
+                    if (foundPossibilities) break;
+                    
+                }
+            }
+            
+            return foundPossibilities;
         }
 
         [Button(ButtonSizes.Large)]
