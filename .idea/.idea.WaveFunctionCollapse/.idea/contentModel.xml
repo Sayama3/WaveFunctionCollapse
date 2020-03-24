@@ -33,6 +33,7 @@
           <e p="CanBeNextTo.cs" t="Include" />
           <e p="CheckNextTo.cs" t="Include" />
           <e p="DernierRecours.cs" t="Include" />
+          <e p="FindGameObjectIndex.cs" t="Include" />
           <e p="Positionneur.cs" t="Include" />
           <e p="RandomizeColor.cs" t="Include" />
           <e p="SeeIndice.cs" t="Include" />

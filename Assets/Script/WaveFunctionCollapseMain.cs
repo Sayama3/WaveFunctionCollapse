@@ -258,7 +258,7 @@ namespace Procedural
         {
             int x = cubeIndex.x;
             int y = cubeIndex.y;
-            int index = mapCubes[x, y].FindIndex(0, mapCubes[x, y].Count, (GameObject obj) => (obj == cubeToCheck));
+            int index = FindGameObjectIndex.IndexGameObject(mapCubes[x, y],cubeToCheck);
             Vector2Int oldIndex = SideHelp.NextIndex(cubeIndex, sideToSearch);
             bool foundPossibilities = false;
 
