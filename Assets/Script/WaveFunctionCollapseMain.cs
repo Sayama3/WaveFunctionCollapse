@@ -176,8 +176,9 @@ namespace Procedural
 
             Side nextSide = (Side)RandomizeIndex(sideCheck.Length);
             
+            
             int h = 0;
-            while (sidePossibilites[(int)nextSide].Count > 0);
+            while (sidePossibilites[(int)nextSide].Count <= 0)
             {
                 if (h == 4)
                 {
@@ -236,7 +237,7 @@ namespace Procedural
                     bool found = false;
                     foreach (var item in cubePossibilites)
                     {
-                        if (item == cube)
+                        if (item.name == cube.name)
                         {
                             found = true;
                             break;
@@ -270,7 +271,7 @@ namespace Procedural
                 {
                     foreach (var possibilite in possibilites)
                     {
-                        if (possibilite == aCube)
+                        if (possibilite.name == aCube.name)
                         {
                             foundPossibilities = true;
                             break;
