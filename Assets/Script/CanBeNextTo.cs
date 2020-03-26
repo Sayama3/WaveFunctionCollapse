@@ -12,7 +12,8 @@ namespace Procedural
         Front,
         Back,
         Left,
-        Right
+        Right,
+        Null
     }
 
     [ExecuteInEditMode]
