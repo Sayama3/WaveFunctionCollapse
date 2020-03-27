@@ -83,13 +83,13 @@ namespace Procedural
                     choosenInitialCube.Add(mapCubes[positionInitialCube[positionInitialCube.Count - 1].x,
                         positionInitialCube[positionInitialCube.Count - 1].y][index]);
 
-                    Debug.Log("La position initial est : " + positionInitialCube[positionInitialCube.Count - 1]);
-                    Debug.Log("Le cube de départ choisi est " + choosenInitialCube[choosenInitialCube.Count - 1].name);
-                    if (choosenInitialCube.Count - 1 == 0)
-                    {
-                        // choosenInitialCube[0].GetComponent<MeshRenderer>().material.color = Color.black;
-                        Debug.Log("Le premier choisi est " + choosenInitialCube[0].name);
-                    }
+                    //Debug.Log("La position initial est : " + positionInitialCube[positionInitialCube.Count - 1]);
+                    //Debug.Log("Le cube de départ choisi est " + choosenInitialCube[choosenInitialCube.Count - 1].name);
+                    //if (choosenInitialCube.Count - 1 == 0)
+                    //{
+                    //    // choosenInitialCube[0].GetComponent<MeshRenderer>().material.color = Color.black;
+                    //    Debug.Log("Le premier choisi est " + choosenInitialCube[0].name);
+                    //}
 
                     // int remover = 0;
                     var testList = new List<GameObject>(mapCubes[positionInitialCube[positionInitialCube.Count - 1].x,
@@ -117,7 +117,7 @@ namespace Procedural
                         }
                     }
 
-                    Debug.Log(possibilitesLeft);
+                    //Debug.Log(possibilitesLeft);
                 }
                 
             } while (possibilitesLeft > 0);
@@ -161,7 +161,7 @@ namespace Procedural
         void CollapseMap(Vector2Int cubeIndex, List<Vector2Int> previousPositions, GameObject objectToDestroy)
         {
         Begining:
-        Debug.Log("je m'apprete a detruire " + objectToDestroy.name + " en coordonnée "+ cubeIndex);
+        //Debug.Log("je m'apprete a detruire " + objectToDestroy.name + " en coordonnée "+ cubeIndex);
             int x = cubeIndex.x;
             int y = cubeIndex.y;
             if (objectToDestroy == null || mapCubes[x,y].Count <= 1) return;
@@ -233,18 +233,18 @@ namespace Procedural
                 for (int i = 0; i < numberOfSidePossible; i++)
                 {
 
-                    Debug.Log(SideHelp.ShowRealName(theSide) + " soit au coordonnée " +
+                    /*Debug.Log(SideHelp.ShowRealName(theSide) + " soit au coordonnée " +
                               nextPositions[(int) theSide] +
                               " " +
                               ((sideCheck[(int) theSide] && sideNumberPossibilities[(int) theSide] > 0)
                                   ? "il y a " + sideNumberPossibilities[i] + "possibilité"
-                                  : "il n'y a pas de possibilité"));
+                                  : "il n'y a pas de possibilité"));*/
 
                     if ((sideCheck[(int) theSide] && sideNumberPossibilities[(int) theSide] > 0))
                     {
                         ++compteur;
-                        Debug.LogWarning("Le compteur est à " + compteur);
-                        Debug.Log("les possibilités sont :");
+                        //Debug.LogWarning("Le compteur est à " + compteur);
+                        //Debug.Log("les possibilités sont :");
                     }
 
 
