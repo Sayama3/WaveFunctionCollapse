@@ -249,7 +249,6 @@ namespace Procedural
                     }
                 }
             }
-            //numberOfPossibilites -= (numberOfPossibilites == actualPossibilites.Count) ? 1 : 0;
 
             return possibilities;
         }

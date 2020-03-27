@@ -105,6 +105,64 @@ namespace Procedural
             }
             return newIndex;
         }
+
+        public static Side SideIncrease(Side givenSide, bool keepTheNullSide = false)
+        {
+            int max = (keepTheNullSide) ? 5 : 4;
+            Side nextSide = ((int) givenSide + 1 < max) ? givenSide + 1 : 0;
+            return nextSide;
+        }
+        public static Side SideDecrease(Side givenSide, bool keepTheNullSide = false)
+        {
+            int max = (keepTheNullSide) ? 5 : 4;
+            Side nextSide = ((int) givenSide - 1 >= 0) ? givenSide - 1 : (Side)(max-1);
+            return nextSide;
+        }
+
+        public static Side sideBetweenTwoPoint(Vector2Int positionReference, Vector2Int positionTest)
+        {
+            Side side = Side.Null;
+            if (positionReference == positionTest) return Side.Null;
+            if (positionReference.x == positionTest.x)
+            {
+                
+                int test = positionReference.y - positionTest.y;
+                if ( Mathf.Abs(test) == 1)
+                {
+                    if (test < 0)
+                    {
+                        side = Side.Front;
+                    }
+                    else
+                    {
+                        side = Side.Back;
+                    }
+                }
+                
+            }
+            else if(positionReference.y == positionTest.y)
+            {
+                int test = positionReference.x - positionTest.x;
+                if (Mathf.Abs(test) == 1)
+                {
+                    if (test < 0)
+                    {
+                        side = Side.Right;
+                    }
+                    else
+                    {
+                        side = Side.Left;
+                    }
+                }
+            }
+            else
+            {
+                side = Side.Null;
+                // Debug.LogError("On tente de savoir un côté entre deux point qui ne sont pas a côté");
+            }
+
+            return side;
+        }
     }
 
 

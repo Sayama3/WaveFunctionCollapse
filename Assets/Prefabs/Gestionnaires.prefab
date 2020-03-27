@@ -9,10 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2210639644141676659}
-  - component: {fileID: 2210639644141676656}
-  - component: {fileID: 2210639644141676657}
   - component: {fileID: -9183154362890290552}
-  - component: {fileID: -2647696570454260614}
+  - component: {fileID: 2106910291557975824}
   m_Layer: 0
   m_Name: Gestionnaires
   m_TagString: Untagged
@@ -34,54 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2210639644141676656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2210639644141676658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a433dd0296e73d64f886823b7682a783, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cubes:
-  - {fileID: 0}
-  theCamera: {fileID: 4202040534243503041, guid: 9edaf488390c97f40a0ce783a2f86cc2,
-    type: 3}
---- !u!114 &2210639644141676657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2210639644141676658}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d979e49fb7ed0e438c229479a7f8f1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numberOfDifferentCubes: 10
-  squareLenght: 8
-  cubesUsed: []
-  allTheCubes:
-  - {fileID: 7697338014608682277, guid: fd6bcfd130101c64ca436830b0a7827e, type: 3}
-  - {fileID: 3239810500055484125, guid: fc9bf068b7f6df343b5b6e4273f1052c, type: 3}
-  - {fileID: 3523869471202437615, guid: 205bbbf8f1c96a942b3e4497610585e8, type: 3}
-  - {fileID: 5350982540920992597, guid: 7184aba7cdd953d4b9cbf46e7629d292, type: 3}
-  - {fileID: 354629336569622117, guid: 6ec777fe09d070b4681e1cba75836f69, type: 3}
-  - {fileID: 2466448915854718922, guid: e9b518031dd10b74d82ed585fb7ed1f4, type: 3}
-  - {fileID: 7680996222026667637, guid: 2e74e546931032a429329dd80fd1d281, type: 3}
-  - {fileID: 3999677962669880012, guid: 6f8539df8ea474340939d6ec66ee62e1, type: 3}
-  - {fileID: 1569806827954110687, guid: f9846ecf6dd878e48825d1f796ae339a, type: 3}
-  - {fileID: 7853321544478228192, guid: e549bc8ca31fc3c408300d45c73f3c06, type: 3}
-  - {fileID: 1110706286657517201, guid: 384c585c73842f840a6c45d7345574f5, type: 3}
-  - {fileID: 9042653086689218390, guid: a5208e994d9968f4280406b0d13d3dff, type: 3}
-  - {fileID: 3505611522421976935, guid: 0be2693e2e08b0d4c8054745bc3de5cf, type: 3}
-  - {fileID: 2245216958834380176, guid: 3d56ee090efd6f5478b444640dde9f3f, type: 3}
-  - {fileID: 8044122151868949870, guid: e9c9b2dc96993894d9f1cf5f98ea879a, type: 3}
-  - {fileID: 3114417604916088653, guid: feec9ad59a56ec54c91e2dfdbf7d1add, type: 3}
 --- !u!114 &-9183154362890290552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d5ea1790599ada43a4de59c2b97c3a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-2647696570454260614
+--- !u!114 &2106910291557975824
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -103,7 +53,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 2210639644141676658}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b819de67fb2c7974d8c651aad239e929, type: 3}
+  m_Script: {fileID: 11500000, guid: 37879f2555cf0044e85275478cb6117e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  indice: {fileID: 0}
+  numberOfDifferentCubes: 16
+  squareLenght: 8
+  cubesUsed:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  allTheCubes:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

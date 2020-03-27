@@ -30,6 +30,7 @@
           </e>
         </e>
         <e p="Script" t="Include">
+          <e p="AnotherWaveFunctionCollapse.cs" t="Include" />
           <e p="CanBeNextTo.cs" t="Include" />
           <e p="CheckNextTo.cs" t="Include" />
           <e p="DernierRecours.cs" t="Include" />
