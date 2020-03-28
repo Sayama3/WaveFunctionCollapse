@@ -36,7 +36,7 @@ namespace Procedural
                     Debug.LogError("Il y a " + (cubes.Count - index) + " cubes qui ne sont pas compris dans le cube");
                     return false;
                 }
-                int positionZ = 0;
+                int positionZ = (int)transform.position.z;
                 int positionX = index;
 
                 while (positionX >= tailleDeLArrete)
@@ -45,6 +45,7 @@ namespace Procedural
                     positionX -= tailleDeLArrete;
                 }
 
+                positionX += (int) transform.position.x;
                 cubes[index].transform.position = new Vector3(positionX, 0, positionZ);
             }
 
@@ -150,15 +151,15 @@ namespace Procedural
             Vector3 position = new Vector3
             {
                 y = tailleDeLArette + 0.5f,
-                x = positionCotee,
-                z = positionCotee
+                x = positionCotee + (int)transform.position.x,
+                z = positionCotee + (int)transform.position.z
             };
 
             theCamera.position = position;
 
         }
 
-        [Button(ButtonSizes.Large)]
+        
         public void GenerateList()
         {
             for (int i = 0; i < cubes.Count; i++)

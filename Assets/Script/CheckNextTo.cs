@@ -26,7 +26,7 @@ namespace Procedural
                     for (int k = 0; k < nextToTest.adjoiningCubes[inverseSide].Count; k++)
                     {
                         GameObject cubeTestSecond = nextToTest.adjoiningCubes[inverseSide][k];
-                        if (cubeTestSecond == gameObject)
+                        if (cubeTestSecond.name.Contains(gameObject.name) || gameObject.name.Contains(cubeTestSecond.name))
                         {
                             found = true;
                             break;
@@ -49,6 +49,10 @@ namespace Procedural
                 {
                     Debug.LogError(problematicsCubes[i].name + " n'est pas associé " + SideHelp.ShowRealName(problematicsSide[i]));
                 }
+            }
+            else
+            {
+                Debug.Log(name + " est tout bon");
             }
         }
     }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\diasa\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\diasa\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_WaveFunctionCollapse.-259168387.00" t="ExcludeRecursive" />
-    <e p="D:\GitHub\WaveFunctionCollapse" t="IncludeRecursive">
+    <e p="C:\Users\ianpo\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\ianpo\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_WaveFunctionCollapse.-1012910437.00" t="ExcludeRecursive" />
+    <e p="C:\Users\ianpo\Documents\GitHub\WaveFunctionCollapse" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Plugins" t="Include">
@@ -39,7 +39,9 @@
           <e p="RandomizeColor.cs" t="Include" />
           <e p="SeeIndice.cs" t="Include" />
           <e p="SelectionCarreParametre.cs" t="Include" />
+          <e p="SetCameraPosition.cs" t="Include" />
           <e p="SideParametre.cs" t="Include" />
+          <e p="StartWithSeed.cs" t="Include" />
           <e p="WaveFunctionCollapseMain.cs" t="Include" />
           <e p="WaveFunctionCollapsePossibilites.cs" t="Include" />
         </e>

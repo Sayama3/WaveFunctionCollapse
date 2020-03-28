@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2210639644141676659}
   - component: {fileID: -9183154362890290552}
   - component: {fileID: 2106910291557975824}
+  - component: {fileID: 7693772466687516051}
   m_Layer: 0
   m_Name: Gestionnaires
   m_TagString: Untagged
@@ -56,6 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37879f2555cf0044e85275478cb6117e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 0}
   numberOfDifferentCubes: 16
   squareLenght: 8
   cubesUsed:
@@ -92,3 +94,15 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!114 &7693772466687516051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2210639644141676658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a04b57c984831b84f9c0b0b093cf34fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

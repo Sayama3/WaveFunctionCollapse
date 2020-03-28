@@ -87,7 +87,10 @@ namespace Procedural
                     this.ConteneurCarreSelectione.GetComponent<MeshRenderer>().material = this.ConteneurMaterielCube;
                     foreach (Transform Child in this.ConteneurCarreSelectione.transform)
                     {
-                        Child.gameObject.SetActive(false);
+                        if (Child.GetComponent<BoxCollider>() != null)
+                        {
+                            Child.gameObject.SetActive(false);
+                        }
                     }
                     this.CarreSelectione--;
                 }else 

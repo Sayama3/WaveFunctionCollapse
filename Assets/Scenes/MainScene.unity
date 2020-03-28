@@ -1959,30 +1959,6 @@ Transform:
   m_Father: {fileID: 1084850001}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &274683214 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4202040534243503042, guid: 9edaf488390c97f40a0ce783a2f86cc2,
-    type: 3}
-  m_PrefabInstance: {fileID: 4202040533546104470}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &274683215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 274683214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db51875fd592b334a94281301d8873b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PremierCarreSelectione: {fileID: 2100000, guid: 95390d898f7e85840b3a295ca0d9f154,
-    type: 2}
-  PremierCarreSelectioneSelectionAutreCarre: {fileID: 2100000, guid: 6561f714d44a069489d121ec1ccb2d93,
-    type: 2}
-  AutreCarreSelectionnable: {fileID: 2100000, guid: 64f70f05c188660488ab42333326b74d,
-    type: 2}
 --- !u!1 &275139363
 GameObject:
   m_ObjectHideFlags: 0

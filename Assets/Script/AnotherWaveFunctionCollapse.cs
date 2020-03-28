@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.UI;
 
 namespace Procedural
 {
     public class AnotherWaveFunctionCollapse : MonoBehaviour
     {
+        [SerializeField] private Text seedWriter;
+        
         [SerializeField]private Transform parent;
         
         private int compteur = 0;
         [SerializeField] private int numberOfDifferentCubes = 3;
-        [SerializeField] private int squareLenght = 5;
+        public int squareLenght = 5;
         private int seed = 0;
 
         [SerializeField] private List<GameObject> cubesUsed = new List<GameObject>();
@@ -37,6 +40,7 @@ namespace Procedural
             seed = (seedChoosen < 1) ? SeedHelp.CreateSeed() : seedChoosen;
             // seed = 15364;
             Debug.LogWarning("Attention, la seed utilisé est la suivante : " + seed);
+            seedWriter.text = "La seed actuelle est : " + seed;
             UseRandomCubes();
 
             if (cubesUsed.Count != numberOfDifferentCubes)
@@ -290,9 +294,9 @@ namespace Procedural
             //     }
             // }
             // if (CubeHaveAnyPossibility(objectToDestroy,cubeIndex,sidesExeption))
-            if (false)
+            if(false)
             {
-                // goto Begining;
+                 goto Begining;
             }
             else
             {
